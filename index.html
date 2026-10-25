@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thời Khắc — Tiệm đồng hồ thủ công</title>
+<meta name="description" content="Thời Khắc — xưởng đồng hồ thủ công: đồng hồ cơ, dây da làm tay, bảo dưỡng và sửa chữa đồng hồ cũ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0F1419; color: #ECE7DD; font-family: 'Be Vietnam Pro', sans-serif; font-size: 17px; line-height: 1.6; }
+  h1, h2, h3, .giant { font-family: 'Noto Serif Display', serif; font-weight: 600; }
+  a { color: #C9A86A; text-decoration: none; }
+  img { display: block; width: 100%; object-fit: cover; background: #3A4750; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .hero img { position: absolute; inset: 0; height: 100%; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,20,25,0.92) 0%, rgba(15,20,25,0.35) 55%, rgba(15,20,25,0.25) 100%); }
+  .hero-inner { position: relative; z-index: 1; width: 100%; padding: 0 24px 72px; max-width: 1080px; margin: 0 auto; }
+  .hero h1 { font-size: 72px; line-height: 1.05; }
+  .hero p { max-width: 560px; margin: 16px 0 28px; color: #ECE7DD; }
+  .cta { display: inline-block; background: #C9A86A; color: #0F1419; border: none; border-radius: 2px; padding: 14px 28px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+
+  /* Dải vạch phút */
+  .ticks { display: flex; justify-content: space-between; align-items: flex-start; height: 24px; margin: 0 auto; max-width: 1080px; padding: 0 24px; }
+  .ticks span { display: block; width: 1px; height: 12px; background: #3A4750; }
+  .ticks span.major { height: 24px; background: #C9A86A; width: 2px; }
+
+  /* Khối */
+  section.block { padding: 96px 0; }
+  .giant { font-size: 160px; line-height: 1; color: #3A4750; margin-bottom: 8px; }
+  .giant.small { font-size: 72px; }
+  section.block h2 { font-size: 40px; line-height: 1.2; margin-bottom: 16px; }
+  section.block .lead { color: #9AA3AB; max-width: 640px; margin-bottom: 40px; }
+
+  /* Bộ sưu tập */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card { background: #1A2129; border: 1px solid #3A4750; }
+  .card img { aspect-ratio: 4 / 5; }
+  .card-body { padding: 20px; }
+  .card-body h3 { font-size: 24px; line-height: 1.3; margin-bottom: 8px; }
+  .card-body p { color: #9AA3AB; font-size: 15px; margin-bottom: 12px; }
+  .price { color: #C9A86A; font-weight: 700; }
+  .note { color: #9AA3AB; font-size: 14px; line-height: 1.5; }
+
+  /* Xưởng */
+  .story { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  .story img { aspect-ratio: 3 / 2; }
+  .story p { margin-bottom: 16px; }
+
+  /* Quy trình */
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .step img { aspect-ratio: 1 / 1; margin-bottom: 16px; }
+  .step-num { color: #C9A86A; font-family: 'Noto Serif Display', serif; font-size: 32px; line-height: 1; margin-bottom: 8px; }
+  .step h3 { font-size: 20px; line-height: 1.35; margin-bottom: 8px; }
+  .step p { color: #9AA3AB; font-size: 15px; }
+
+  /* Bảng giá */
+  table.price-table { width: 100%; border-collapse: collapse; }
+  table.price-table th, table.price-table td { text-align: left; padding: 16px 12px; border-bottom: 1px solid #3A4750; }
+  table.price-table th { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #9AA3AB; }
+  table.price-table td:last-child { color: #C9A86A; font-weight: 700; white-space: nowrap; }
+
+  /* Form */
+  form.book { background: #1A2129; border: 1px solid #3A4750; padding: 32px; max-width: 640px; }
+  form.book label { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #9AA3AB; margin: 16px 0 6px; }
+  form.book label:first-child { margin-top: 0; }
+  form.book input, form.book select, form.book textarea { width: 100%; background: #0F1419; border: 1px solid #3A4750; color: #ECE7DD; font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; padding: 12px 14px; border-radius: 2px; }
+  form.book input::placeholder, form.book textarea::placeholder { color: #9AA3AB; }
+  form.book button { margin-top: 24px; }
+  #form-thanks { display: none; margin-top: 20px; color: #C9A86A; font-weight: 700; }
+
+  footer { border-top: 1px solid #3A4750; padding: 64px 0 48px; }
+  footer p { color: #9AA3AB; font-size: 14px; line-height: 1.8; }
+  footer .brand { font-family: 'Noto Serif Display', serif; font-size: 28px; color: #ECE7DD; margin-bottom: 12px; }
+
+  @media (max-width: 768px) {
+    body { font-size: 16px; }
+    .hero h1 { font-size: 44px; line-height: 1.1; }
+    .giant { font-size: 96px; }
+    .giant.small { font-size: 56px; }
+    section.block { padding: 56px 0; }
+    section.block h2 { font-size: 30px; line-height: 1.25; }
+    .grid3 { grid-template-columns: 1fr; }
+    .grid4 { grid-template-columns: 1fr 1fr; }
+    .story { grid-template-columns: 1fr; }
+    form.book { padding: 24px 20px; }
+  }
+  @media (max-width: 480px) {
+    .grid4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1920&auto=format&fit=crop" alt="Ảnh mẫu: mặt đồng hồ cơ chụp macro trên nền tối">
+  <div class="hero-inner">
+    <h1>Thời Khắc</h1>
+    <p>Xưởng đồng hồ thủ công — làm đồng hồ cơ, khâu dây da bằng tay, và chăm sóc những chiếc đồng hồ cũ trở lại đúng nhịp của nó.</p>
+    <a class="cta" href="#dat-lich">Đặt lịch bảo dưỡng</a>
+  </div>
+</header>
+
+<div class="ticks" aria-hidden="true"><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- 01 BỘ SƯU TẬP -->
+<section class="block" id="bo-suu-tap">
+  <div class="wrap">
+    <div class="giant">01</div>
+    <h2>Bộ sưu tập</h2>
+    <p class="lead">Ba dòng đồng hồ của xưởng — mỗi chiếc đều qua tay thợ, từ bộ máy đến đường chỉ da.</p>
+    <div class="grid3">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=900&auto=format&fit=crop" alt="Ảnh mẫu: đồng hồ cổ điển trên nền tối">
+        <div class="card-body">
+          <h3>Cổ điển</h3>
+          <p>Mặt số men trắng, kim lá, vỏ thép đánh bóng — lặng lẽ và bền theo năm tháng.</p>
+          <div class="price">12.500.000đ <span class="note">— Giá mẫu</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=900&auto=format&fit=crop" alt="Ảnh mẫu: đồng hồ thể thao trên nền tối">
+        <div class="card-body">
+          <h3>Thể thao</h3>
+          <p>Vỏ thép chắc, dạ quang rõ, chịu va đập — đeo hằng ngày vẫn giữ nhịp chuẩn.</p>
+          <div class="price">18.900.000đ <span class="note">— Giá mẫu</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?q=80&w=900&auto=format&fit=crop" alt="Ảnh mẫu: đồng hồ dây da thủ công trên nền tối">
+        <div class="card-body">
+          <h3>Dây da thủ công</h3>
+          <p>Dây da khâu tay từng mũi, càng đeo càng mềm và ôm cổ tay riêng của chủ nhân.</p>
+          <div class="price">9.800.000đ <span class="note">— Giá mẫu</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="ticks" aria-hidden="true"><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- 02 CÂU CHUYỆN XƯỞNG -->
+<section class="block" id="xuong">
+  <div class="wrap">
+    <div class="giant">02</div>
+    <h2>Câu chuyện xưởng</h2>
+    <div class="story">
+      <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1200&auto=format&fit=crop" alt="Ảnh mẫu: đồng hồ và dụng cụ trên bàn thợ">
+      <div>
+        <p>Thời Khắc bắt đầu từ một bàn thợ nhỏ và một niềm tin đơn giản: đồng hồ cơ không chỉ để xem giờ — nó giữ lại thời gian của người đeo nó.</p>
+        <p>Mỗi chiếc đồng hồ qua xưởng đều được tháo ra, xem từng chi tiết, rồi lắp lại bằng tay. Người thợ chính của xưởng: <strong>[CẦN BỔ SUNG]</strong>.</p>
+        <p class="note">Ảnh trên trang này là ảnh mẫu, dùng để minh họa phong cách của xưởng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticks" aria-hidden="true"><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- 03 QUY TRÌNH BẢO DƯỠNG -->
+<section class="block" id="quy-trinh">
+  <div class="wrap">
+    <div class="giant">03</div>
+    <h2>Quy trình bảo dưỡng</h2>
+    <p class="lead">Bốn bước, làm chậm và làm kỹ — đồng hồ của bạn được trả về cùng một nhịp chuẩn như lúc mới ra xưởng.</p>
+    <div class="grid4">
+      <article class="step">
+        <img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=800&auto=format&fit=crop" alt="Ảnh mẫu: mặt đồng hồ chụp cận cảnh">
+        <div class="step-num">1</div>
+        <h3>Tiếp nhận &amp; chẩn đoán</h3>
+        <p>Nghe tình trạng đồng hồ, kiểm tra bộ máy và báo rõ việc cần làm trước khi chạm vào.</p>
+      </article>
+      <article class="step">
+        <img src="https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=800&auto=format&fit=crop" alt="Ảnh mẫu: chi tiết bộ máy đồng hồ">
+        <div class="step-num">2</div>
+        <h3>Tháo máy &amp; vệ sinh</h3>
+        <p>Tháo từng chi tiết, làm sạch bằng dung dịch chuyên dụng, thay linh kiện đã mòn.</p>
+      </article>
+      <article class="step">
+        <img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=800&auto=format&fit=crop" alt="Ảnh mẫu: đồng hồ trên nền tối sang trọng">
+        <div class="step-num">3</div>
+        <h3>Lau dầu &amp; căn chỉnh</h3>
+        <p>Tra dầu mới cho từng chân kính, căn chỉnh sai số về trong ngưỡng của nhà sản xuất.</p>
+      </article>
+      <article class="step">
+        <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=800&auto=format&fit=crop" alt="Ảnh mẫu: đồng hồ đeo tay hoàn thiện">
+        <div class="step-num">4</div>
+        <h3>Lắp ráp &amp; kiểm tra 72 giờ</h3>
+        <p>Lắp ráp lại, chạy thử liên tục 72 giờ rồi mới giao — kèm phiếu ghi rõ việc đã làm.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="ticks" aria-hidden="true"><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- 04 BẢNG GIÁ MẪU -->
+<section class="block" id="bang-gia">
+  <div class="wrap">
+    <div class="giant">04</div>
+    <h2>Bảng giá mẫu</h2>
+    <p class="lead">Giá dưới đây là giá mẫu để tham khảo — giá thật sẽ báo sau khi thợ xem trực tiếp chiếc đồng hồ của bạn.</p>
+    <table class="price-table">
+      <tr><th>Hạng mục</th><th>Giá mẫu</th></tr>
+      <tr><td>Bảo dưỡng cơ bản (vệ sinh, kiểm tra)</td><td>850.000đ</td></tr>
+      <tr><td>Lau dầu toàn bộ bộ máy</td><td>2.500.000đ</td></tr>
+      <tr><td>Thay dây da khâu tay</td><td>1.200.000đ</td></tr>
+      <tr><td>Phục chế mặt số</td><td>3.800.000đ</td></tr>
+      <tr><td>Kiểm tra chống nước</td><td>450.000đ</td></tr>
+    </table>
+  </div>
+</section>
+
+<div class="ticks" aria-hidden="true"><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="major"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+<!-- 05 FORM ĐẶT LỊCH -->
+<section class="block" id="dat-lich">
+  <div class="wrap">
+    <div class="giant">05</div>
+    <h2>Đặt lịch bảo dưỡng</h2>
+    <p class="lead">Để lại thông tin — xưởng sẽ liên hệ xác nhận lịch. Form này chỉ là giao diện minh họa, chưa gửi đi thật.</p>
+    <form class="book" id="booking-form">
+      <label for="ten">Họ tên</label>
+      <input id="ten" name="ten" type="text" placeholder="Tên của bạn" required>
+      <label for="sdt">Số điện thoại</label>
+      <input id="sdt" name="sdt" type="tel" placeholder="Số điện thoại liên hệ" required>
+      <label for="dong">Dòng đồng hồ</label>
+      <select id="dong" name="dong">
+        <option>Cổ điển</option>
+        <option>Thể thao</option>
+        <option>Dây da thủ công</option>
+        <option>Đồng hồ khác / đồng hồ cũ cần sửa</option>
+      </select>
+      <label for="ghichu">Ghi chú</label>
+      <textarea id="ghichu" name="ghichu" rows="3" placeholder="Tình trạng đồng hồ, thời gian muốn hẹn..."></textarea>
+      <button class="cta" type="submit">Gửi yêu cầu đặt lịch</button>
+      <p id="form-thanks">Cảm ơn bạn! Đây là form minh họa — yêu cầu chưa được gửi đi thật. Xưởng sẽ liên hệ khi form chính thức hoạt động.</p>
+    </form>
+  </div>
+</section>
+
+<!-- 06 CHÂN TRANG -->
+<footer>
+  <div class="wrap">
+    <div class="giant small">06</div>
+    <div class="brand">Thời Khắc</div>
+    <p>Địa chỉ: [CẦN BỔ SUNG]<br>
+    Điện thoại: [CẦN BỔ SUNG]<br>
+    Giờ mở cửa: [CẦN BỔ SUNG]<br>
+    Người phụ trách: [CẦN BỔ SUNG]</p>
+    <p style="margin-top:16px;">Ảnh trên trang là ảnh mẫu. Giá niêm yết là giá mẫu, chưa phải giá thật.</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('booking-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  document.getElementById('form-thanks').style.display = 'block';
+});
+</script>
+</body>
+</html>
